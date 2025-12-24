@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>API Assignment</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Random User Info</h1>
+  <a href="/api/getUser"><button>Get Random User</button></a>
+
+  <% if(user) { %>
+    <div class="card">
+      <img src="<%= user.picture %>" alt="User Picture">
+      <h2><%= user.firstName %> <%= user.lastName %></h2>
+      <p>Gender: <%= user.gender %></p>
+      <p>Age: <%= user.age %></p>
+      <p>Date of Birth: <%= user.dob %></p>
+      <p>City: <%= user.city %></p>
+      <p>Country: <%= user.country %></p>
+      <p>Street: <%= user.street %></p>
+    </div>
+
+    <div class="card">
+      <h2>Country Info: <%= country.name %></h2>
+      <p>Capital: <%= country.capital %></p>
+      <p>Languages: <%= country.languages %></p>
+      <p>Currency: <%= country.currency %></p>
+      <img src="<%= country.flag %>" alt="Flag" width="150">
+    </div>
+
+    <div class="card">
+      <h2>Exchange Rate</h2>
+      <p>1 <%= country.currency %> = <%= exchange.USD %> USD</p>
+      <p>1 <%= country.currency %> = <%= exchange.KZT %> KZT</p>
+    </div>
+
+    <div class="card">
+      <h2>News</h2>
+      <% news.forEach(n => { %>
+        <div class="news-item">
+          <h3><a href="<%= n.url %>" target="_blank"><%= n.title %></a></h3>
+          <% if(n.image){ %>
+            <img src="<%= n.image %>" alt="News Image" width="200">
+          <% } %>
+          <p><%= n.description %></p>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+
+</body>
+</html>
