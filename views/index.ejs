@@ -2,52 +2,114 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>API Assignment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random User Information</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <h1>Random User Info</h1>
-  <a href="/api/getUser"><button>Get Random User</button></a>
+  <div class="container">
+    <header>
+      <h1>Random User Information Portal</h1>
+      <p>Discover random users from around the world</p>
+    </header>
 
-  <% if(user) { %>
-    <div class="card">
-      <img src="<%= user.picture %>" alt="User Picture">
-      <h2><%= user.firstName %> <%= user.lastName %></h2>
-      <p>Gender: <%= user.gender %></p>
-      <p>Age: <%= user.age %></p>
-      <p>Date of Birth: <%= user.dob %></p>
-      <p>City: <%= user.city %></p>
-      <p>Country: <%= user.country %></p>
-      <p>Street: <%= user.street %></p>
+    <div class="control-section">
+      <button id="fetchUserBtn" class="btn-primary">Generate Random User</button>
+      <div id="loading" class="loading hidden">Loading...</div>
     </div>
 
-    <div class="card">
-      <h2>Country Info: <%= country.name %></h2>
-      <p>Capital: <%= country.capital %></p>
-      <p>Languages: <%= country.languages %></p>
-      <p>Currency: <%= country.currency %></p>
-      <img src="<%= country.flag %>" alt="Flag" width="150">
-    </div>
+    <div id="errorMessage" class="error-message hidden"></div>
 
-    <div class="card">
-      <h2>Exchange Rate</h2>
-      <p>1 <%= country.currency %> = <%= exchange.USD %> USD</p>
-      <p>1 <%= country.currency %> = <%= exchange.KZT %> KZT</p>
-    </div>
-
-    <div class="card">
-      <h2>News</h2>
-      <% news.forEach(n => { %>
-        <div class="news-item">
-          <h3><a href="<%= n.url %>" target="_blank"><%= n.title %></a></h3>
-          <% if(n.image){ %>
-            <img src="<%= n.image %>" alt="News Image" width="200">
-          <% } %>
-          <p><%= n.description %></p>
+    <!-- User Profile Section -->
+    <section id="userSection" class="section hidden">
+      <h2>User Profile</h2>
+      <div class="user-card">
+        <div class="user-image">
+          <img id="userPicture" src="" alt="User Picture">
         </div>
-      <% }) %>
-    </div>
-  <% } %>
+        <div class="user-details">
+          <div class="detail-row">
+            <span class="label">Name:</span>
+            <span id="userName"></span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Gender:</span>
+            <span id="userGender"></span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Age:</span>
+            <span id="userAge"></span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Date of Birth:</span>
+            <span id="userDob"></span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Address:</span>
+            <span id="userAddress"></span>
+          </div>
+          <div class="detail-row">
+            <span class="label">City:</span>
+            <span id="userCity"></span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Country:</span>
+            <span id="userCountry"></span>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- Country Information Section -->
+    <section id="countrySection" class="section hidden">
+      <h2>Country Information</h2>
+      <div class="country-card">
+        <div class="flag-container">
+          <img id="countryFlag" src="" alt="Country Flag">
+        </div>
+        <div class="country-details">
+          <div class="detail-row">
+            <span class="label">Country:</span>
+            <span id="countryName"></span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Capital:</span>
+            <span id="countryCapital"></span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Languages:</span>
+            <span id="countryLanguages"></span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Currency:</span>
+            <span id="countryCurrency"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exchange Rate Section -->
+      <div id="exchangeSection" class="exchange-card hidden">
+        <h3>Exchange Rates</h3>
+        <div class="exchange-details">
+          <div class="exchange-item">
+            <span class="exchange-label">To USD:</span>
+            <span id="exchangeUSD" class="exchange-value"></span>
+          </div>
+          <div class="exchange-item">
+            <span class="exchange-label">To KZT:</span>
+            <span id="exchangeKZT" class="exchange-value"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="newsSection" class="section hidden">
+      <h2>Latest News</h2>
+      <div id="newsContainer" class="news-container"></div>
+    </section>
+  </div>
+
+  <script src="/js/client.js"></script>
 </body>
 </html>
